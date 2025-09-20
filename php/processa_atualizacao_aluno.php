@@ -29,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ]);
 
         if ($stmt->rowCount() > 0) {
-            header("Location: ../gerenciar_alunos.php?sucesso=Aluno atualizado com sucesso!");
+            header("Location: ../pages/gerenciar_alunos.php?sucesso=Aluno atualizado com sucesso!");
         } else {
             throw new Exception("Nenhuma alteração foi feita ou o aluno não pertence à sua instituição.");
         }
     } catch (Exception $e) {
-        header("Location: ../gerenciar_alunos.php?erro=Erro ao atualizar aluno: " . $e->getMessage());
+        header("Location: ../pages/gerenciar_alunos.php?erro=Erro ao atualizar aluno: " . $e->getMessage());
     }
 }
 ?>

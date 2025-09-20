@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
         $pdo->commit();
-        header("Location: ../painel.php?sucesso=cadastro_responsavel");
+        header("Location: ../pages/painel.php?sucesso=cadastro_responsavel");
     } catch (Exception $e) {
         $pdo->rollBack();
         die("Erro ao cadastrar: " . $e->getMessage());

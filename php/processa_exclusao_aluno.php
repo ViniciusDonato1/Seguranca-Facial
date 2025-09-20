@@ -4,7 +4,7 @@ require 'conexao.php';
 
 $id_aluno = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$id_aluno) {
-    header("Location: ../gerenciar_alunos.php?erro=ID de aluno inválido.");
+    header("Location: ../pages/gerenciar_alunos.php?erro=ID de aluno inválido.");
     exit();
 }
 
@@ -64,11 +64,11 @@ try {
     $stmt_delete_aluno->execute(['id_aluno' => $id_aluno]);
 
     $pdo->commit();
-    header("Location: ../gerenciar_alunos.php?sucesso=Aluno e responsáveis órfãos foram excluídos com sucesso!");
+    header("Location: ../pages/gerenciar_alunos.php?sucesso=Aluno e responsáveis órfãos foram excluídos com sucesso!");
 
 } catch (Exception $e) {
     $pdo->rollBack();
-    header("Location: ../gerenciar_alunos.php?erro=" . urlencode($e->getMessage()));
+    header("Location: ../pages/gerenciar_alunos.php?erro=" . urlencode($e->getMessage()));
     exit();
 }
 ?>

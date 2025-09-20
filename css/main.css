@@ -1,6 +1,3 @@
-/* --- ARQUIVO PRINCIPAL DE IMPORTS E TEMAS --- */
-
-/* 1. Importando todos os módulos de estilo */
 @import url('components/_base.css');
 @import url('components/_layout.css');
 @import url('components/_forms.css');
@@ -10,9 +7,8 @@
 @import url('pages/_admin.css');
 @import url('components/_responsive.css');
 
-/* 2. Definindo as variáveis de cor (temas) */
+
 :root {
-    /* MODO CLARO (PADRÃO) */
     --bg-color: #f0f2f5;
     --sidebar-bg: #ffffff;
     --sidebar-text: #333;
@@ -35,18 +31,17 @@
 }
 
 body.dark-mode {
-    /* MODO NOTURNO (Versão Original Azulada) */
-    --bg-color: #1a1a2e; /* Fundo geral azul bem escuro */
-    --sidebar-bg: #16213e; /* Sidebar/cards azul escuro */
+    --bg-color: #1a1a2e;
+    --sidebar-bg: #16213e;
     --sidebar-text: #e0e0e0;
     --sidebar-hover-bg: #0f3460;
-    --main-bg: #0d1222; /* Conteúdo principal quase preto */
+    --main-bg: #0d1222;
     --text-color: #c0c0c0;
     --heading-color: #e0e0e0;
     --border-color: #2b394f;
     --input-bg: #222a3d;
     --input-border: #3a475d;
-    --button-primary-bg: #3e64ff; /* Azul vibrante */
+    --button-primary-bg: #3e64ff; 
     --button-primary-hover-bg: #2b4ccb;
     --card-bg: #16213e;
     --shadow-color: rgba(0, 0, 0, 0.4);

@@ -1,8 +1,4 @@
 <?php
-// Adiciona estas duas linhas no topo para forçar a exibição de erros durante a depuração
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require 'sessoes.php';
 require 'conexao.php';
 

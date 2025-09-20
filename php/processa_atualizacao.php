@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $pdo->commit();
-        header("Location: ../gerenciar_responsaveis.php?sucesso=Responsável atualizado com sucesso!");
+        header("Location: ../pages/gerenciar_responsaveis.php?sucesso=Responsável atualizado com sucesso!");
 
     } catch (Exception $e) {
         $pdo->rollBack();

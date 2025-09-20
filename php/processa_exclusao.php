@@ -3,12 +3,12 @@ require 'sessoes.php';
 require 'conexao.php';
 
 if (!isset($_GET['id'])) {
-    header("Location: ../gerenciar_responsaveis.php?erro=ID não fornecido");
+    header("Location: ../pages/gerenciar_responsaveis.php?erro=ID não fornecido");
     exit();
 }
 $id_responsavel = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$id_responsavel) {
-    header("Location: ../gerenciar_responsaveis.php?erro=ID inválido");
+    header("Location: ../pages/gerenciar_responsaveis.php?erro=ID inválido");
     exit();
 }
 
@@ -40,11 +40,11 @@ try {
     delete_files_by_pattern($path_pattern_npy_antigo);
 
     $pdo->commit();
-    header("Location: ../gerenciar_responsaveis.php?sucesso=Responsável e todos os seus dados foram excluídos com sucesso!");
+    header("Location: ../pages/gerenciar_responsaveis.php?sucesso=Responsável e todos os seus dados foram excluídos com sucesso!");
 
 } catch (Exception $e) {
     $pdo->rollBack();
-    header("Location: ../gerenciar_responsaveis.php?erro=" . urlencode($e->getMessage()));
+    header("Location: ../pages/gerenciar_responsaveis.php?erro=" . urlencode($e->getMessage()));
     exit();
 }
 ?>

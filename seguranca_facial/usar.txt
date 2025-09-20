@@ -1,5 +1,0 @@
-.\.venv\Scripts\Activate.ps1  // ativa a venv
-
-deactivate // desativa a venv
-
-py python_service/app.py //ativa o python_service

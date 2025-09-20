@@ -1,0 +1,83 @@
+@media (max-width: 992px) {
+
+    /* --- 1. ESTILOS DO BOTÃO "HAMBÚRGUER" --- */
+    .sidebar-toggle {
+        display: block; /* Faz o botão aparecer, pois ele pode estar escondido em telas grandes */
+        position: fixed; /* Fixa o botão na tela, mesmo com a rolagem */
+        top: 15px;
+        left: 15px;
+        z-index: 1001; /* Garante que ele fique acima de outros elementos */
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px var(--shadow-color);
+    }
+    
+    /* --- 2. ESCONDENDO E EXIBINDO A SIDEBAR --- */
+    .sidebar {
+        position: fixed; /* Muda a sidebar para uma posição fixa */
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: 1000;
+        transform: translateX(-100%); /* Começa escondida para a esquerda */
+        transition: transform 0.3s ease-in-out;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .sidebar.sidebar-visible {
+        transform: translateX(0); /* Quando a classe é adicionada, a sidebar desliza para a posição visível */
+    }
+
+    /* --- 3. AJUSTANDO O CONTEÚDO PRINCIPAL --- */
+    .main-content {
+        /* Remove o padding da esquerda para ocupar a tela toda */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* css/components/_responsive.css */
+
+/* Regras para telas ainda menores, como celulares (até 768px) */
+@media (max-width: 768px) {
+
+    /* --- RESPONSIVIDADE DAS TABELAS --- */
+    table thead {
+        /* 1. Esconde o cabeçalho original da tabela */
+        display: none;
+    }
+
+    table tr {
+        /* 2. Cada linha vira um "card" */
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    table td {
+        /* 3. Cada célula ocupa a linha inteira */
+        display: block;
+        text-align: right; /* Alinha o valor à direita */
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    /* 4. A MÁGICA: O rótulo (label) aparece antes do valor */
+    table td::before {
+        content: attr(data-label); /* Pega o texto do atributo data-label que você adicionou */
+        float: left; /* Joga o rótulo para a esquerda */
+        font-weight: bold;
+        color: var(--heading-color);
+    }
+}

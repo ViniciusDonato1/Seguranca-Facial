@@ -10,18 +10,13 @@ from PIL import Image
 load_dotenv()
 app = Flask(__name__)
 
-# --- INÍCIO DA CORREÇÃO DEFINITIVA DE CAMINHO ---
-# Pega o diretório onde o script app.py está localizado
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Cria o caminho para a pasta 'known_faces' DENTRO do diretório do script
 FACES_DIR = os.path.join(script_dir, 'known_faces')
-# --- FIM DA CORREÇÃO ---
 
 if not os.path.exists(FACES_DIR):
     os.makedirs(FACES_DIR)
 
-# (O resto do arquivo continua exatamente o mesmo...)
 
 def base64_to_image(base64_string):
     if "base64," in base64_string:

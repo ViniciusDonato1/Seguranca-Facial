@@ -1,8 +1,7 @@
 <?php
 session_start();
-// Se já estiver logado, redireciona para o painel
 if (isset($_SESSION['id_instituicao'])) {
-    header("Location: painel.php");
+    header("Location: pages/painel.php");
     exit();
 }
 ?>

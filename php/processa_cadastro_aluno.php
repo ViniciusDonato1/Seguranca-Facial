@@ -18,10 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'data_nasc' => $data_nascimento,
             'turma' => $turma
         ]);
-        header("Location: ../cadastro_aluno.php?sucesso=1");
+        header("Location: ../pages/cadastro_aluno.php?sucesso=1");
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
-            header("Location: ../cadastro_aluno.php?erro=CPF já cadastrado.");
+            header("Location: ../pages/cadastro_aluno.php?erro=CPF já cadastrado.");
         } else {
             die("Erro ao cadastrar aluno: " . $e->getMessage());
         }
