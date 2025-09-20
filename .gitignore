@@ -1,0 +1,8 @@
+# Ambiente Virtual do Python
+.venv/
+
+# Arquivos de dados faciais
+python_service/known_faces/
+
+# Arquivo de configuração
+python_service/.env

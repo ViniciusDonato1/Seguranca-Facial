@@ -1,0 +1,6 @@
+USE seguranca_facial;
+
+UPDATE super_admins SET password_hash = 'COLE_O_SEU_NOVO_HASH_AQUI' 
+WHERE username = 'admin';
+
+rodar esse no banco de dados.

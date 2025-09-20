@@ -1,0 +1,59 @@
+/* --- ARQUIVO PRINCIPAL DE IMPORTS E TEMAS --- */
+
+/* 1. Importando todos os módulos de estilo */
+@import url('components/_base.css');
+@import url('components/_layout.css');
+@import url('components/_forms.css');
+@import url('components/_tables.css');
+@import url('components/_video.css');
+@import url('pages/_login.css');
+@import url('pages/_admin.css');
+@import url('components/_responsive.css');
+
+/* 2. Definindo as variáveis de cor (temas) */
+:root {
+    /* MODO CLARO (PADRÃO) */
+    --bg-color: #f0f2f5;
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #333;
+    --sidebar-hover-bg: #e9ecef;
+    --main-bg: #ffffff;
+    --text-color: #3c4043;
+    --heading-color: #202124;
+    --border-color: #dadce0;
+    --input-bg: #fdfdfd;
+    --input-border: #dcdcdc;
+    --button-primary-bg: #1a73e8;
+    --button-primary-hover-bg: #185abc;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --success-color: #1e8e3e;
+    --error-color: #d93025;
+    --warning-color: #f9ab00;
+    --item-bg: #f8f9fa;
+    --item-hover-bg: #f1f3f4;
+}
+
+body.dark-mode {
+    /* MODO NOTURNO (Versão Original Azulada) */
+    --bg-color: #1a1a2e; /* Fundo geral azul bem escuro */
+    --sidebar-bg: #16213e; /* Sidebar/cards azul escuro */
+    --sidebar-text: #e0e0e0;
+    --sidebar-hover-bg: #0f3460;
+    --main-bg: #0d1222; /* Conteúdo principal quase preto */
+    --text-color: #c0c0c0;
+    --heading-color: #e0e0e0;
+    --border-color: #2b394f;
+    --input-bg: #222a3d;
+    --input-border: #3a475d;
+    --button-primary-bg: #3e64ff; /* Azul vibrante */
+    --button-primary-hover-bg: #2b4ccb;
+    --card-bg: #16213e;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --success-color: #5cb85c;
+    --error-color: #d9534f;
+    --warning-color: #f0ad4e;
+    --item-bg: #1a2a4a;
+    --item-hover-bg: #131d35;
+    --item-border: #2b394f;
+}

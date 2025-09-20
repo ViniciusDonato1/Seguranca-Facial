@@ -1,0 +1,14 @@
+/* Estilos específicos para a área de administração */
+
+/* Adiciona a classe no body para podermos customizar só o admin */
+body.admin-page .sidebar h2 {
+    font-size: 1.8em;
+    color: var(--button-primary-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+body.admin-page .main-content table th {
+    font-size: 1.1em; /* Cabeçalhos da tabela um pouco maiores */
+}
