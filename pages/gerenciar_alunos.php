@@ -2,13 +2,41 @@
 require '../php/sessoes.php';
 require '../php/conexao.php';
 
+// --- LÓGICA DO FILTRO E BUSCA (ADICIONADO) ---
+
+// 1. Pega os valores de busca e filtro da URL (se existirem)
+$termo_busca = $_GET['busca'] ?? '';
+$filtro_turma = $_GET['turma'] ?? '';
+
+// 2. Monta a base da consulta SQL
 $sql = "SELECT id, nome_completo, cpf, data_nascimento, turma 
         FROM alunos 
-        WHERE id_instituicao = :id_instituicao 
-        ORDER BY nome_completo ASC";
+        WHERE id_instituicao = :id_instituicao";
+
+$params = ['id_instituicao' => $id_instituicao];
+
+// 3. Adiciona as condições de busca e filtro na consulta SQL
+if (!empty($termo_busca)) {
+    $sql .= " AND (nome_completo LIKE :busca OR cpf LIKE :busca)";
+    $params['busca'] = '%' . $termo_busca . '%';
+}
+if (!empty($filtro_turma)) {
+    $sql .= " AND turma = :turma";
+    $params['turma'] = $filtro_turma;
+}
+
+$sql .= " ORDER BY nome_completo ASC";
+
 $stmt = $pdo->prepare($sql);
-$stmt->execute(['id_instituicao' => $id_instituicao]);
+$stmt->execute($params);
 $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// --- LÓGICA PARA POPULAR O DROPDOWN DE TURMAS (ADICIONADO) ---
+$sql_turmas = "SELECT DISTINCT turma FROM alunos WHERE id_instituicao = :id_instituicao AND turma IS NOT NULL AND turma != '' ORDER BY turma ASC";
+$stmt_turmas = $pdo->prepare($sql_turmas);
+$stmt_turmas->execute(['id_instituicao' => $id_instituicao]);
+$turmas = $stmt_turmas->fetchAll(PDO::FETCH_COLUMN);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +53,30 @@ $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <main>
             <?php if (isset($_GET['sucesso'])): ?><p class="success"><?php echo htmlspecialchars($_GET['sucesso']); ?></p><?php endif; ?>
             <?php if (isset($_GET['erro'])): ?><p class="error"><?php echo htmlspecialchars($_GET['erro']); ?></p><?php endif; ?>
+
+            <div class="search-filter-container">
+                <form action="gerenciar_alunos.php" method="GET" class="search-filter-form">
+                    <div class="form-group">
+                        <label for="busca">Buscar por Nome ou CPF:</label>
+                        <input type="search" name="busca" id="busca" placeholder="Digite para buscar..." value="<?php echo htmlspecialchars($termo_busca); ?>">
+                    </div>
+                    <div class="form-group form-group-buttons">
+                        <label for="turma">Filtrar por Turma:</label>
+                        <select name="turma" id="turma">
+                            <option value="">Todas as Turmas</option>
+                            <?php foreach ($turmas as $turma): ?>
+                                <option value="<?php echo htmlspecialchars($turma); ?>" <?php echo ($filtro_turma == $turma) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($turma); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-action">Filtrar</button>
+                        <a href="gerenciar_alunos.php" class="btn-action btn-secondary">Limpar</a>
+                    </div>
+                </form>
+            </div>
             <table>
                 <thead>
                     <tr><th>Nome Completo</th><th>CPF</th><th>Data de Nasc.</th><th>Turma</th><th>Ações</th></tr>
@@ -32,18 +84,18 @@ $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php foreach ($alunos as $aluno): ?>
                     <tr>
-                        <td> data-label="Nome Completo"<?php echo htmlspecialchars($aluno['nome_completo']); ?></td>
-                        <td> data-label="cpf"<?php echo htmlspecialchars($aluno['cpf']); ?></td>
-                        <td> data-label="Data Nascimento"<?php echo date('d/m/Y', strtotime($aluno['data_nascimento'])); ?></td>
-                        <td> data-label="Turma"<?php echo htmlspecialchars($aluno['turma']); ?></td>
-                        <td>
+                        <td data-label="Nome Completo"><?php echo htmlspecialchars($aluno['nome_completo']); ?></td>
+                        <td data-label="CPF"><?php echo htmlspecialchars($aluno['cpf']); ?></td>
+                        <td data-label="Data de Nasc."><?php echo date('d/m/Y', strtotime($aluno['data_nascimento'])); ?></td>
+                        <td data-label="Turma"><?php echo htmlspecialchars($aluno['turma']); ?></td>
+                        <td data-label="Ações">
                             <a class="btn-action btn-edit" href="editar_aluno.php?id=<?php echo $aluno['id']; ?>">Editar</a>
                             <a class="btn-action btn-delete" href="../php/processa_exclusao_aluno.php?id=<?php echo $aluno['id']; ?>" onclick="return confirm('ATENÇÃO: Excluir um aluno também removerá permanentemente os responsáveis associados APENAS a ele. Deseja continuar?');">Excluir</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
                     <?php if (empty($alunos)): ?>
-                    <tr><td colspan="5">Nenhum aluno cadastrado.</td></tr>
+                    <tr><td colspan="5">Nenhum aluno encontrado com os critérios de busca.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

@@ -24,14 +24,21 @@ if (!$responsavel) { header("Location: gerenciar_responsaveis.php"); exit(); }
     <div class="main-content">
         <header><h1>Editar Responsável: <?php echo htmlspecialchars($responsavel['nome_completo']); ?></h1></header>
         <main>
-            <form id="cadastroForm" action="../php/processa_atualizacao.php" method="POST">
-                <input type="hidden" name="id_responsavel" value="<?php echo $responsavel['id']; ?>">
-                <label for="nome_responsavel">Nome Completo:</label>
-                <input type="text" name="nome_responsavel" value="<?php echo htmlspecialchars($responsavel['nome_completo']); ?>" required>
-                <label for="parentesco">Parentesco:</label>
-                <input type="text" name="parentesco" value="<?php echo htmlspecialchars($responsavel['parentesco']); ?>" required>
-                <button type="submit" id="submitBtn">Salvar Alterações</button>
-            </form>
+            <main>
+    <form id="formEditaResponsavel" action="../php/processa_atualizacao.php" method="POST">
+        <input type="hidden" name="id_responsavel" value="<?php echo $responsavel['id']; ?>">
+
+        <label for="nome_responsavel">Nome Completo:</label>
+        <input type="text" id="nome_responsavel" name="nome_responsavel" value="<?php echo htmlspecialchars($responsavel['nome_completo']); ?>" required>
+
+        <label for="parentesco">Parentesco:</label>
+        <input type="text" id="parentesco" name="parentesco" value="<?php echo htmlspecialchars($responsavel['parentesco']); ?>" required>
+
+        <div id="formStatus" class="status-message" style="display: none;"></div>
+
+        <button type="submit" id="submitBtn">Salvar Alterações</button>
+    </form>
+</main>
         </main>
     </div>
 </body>

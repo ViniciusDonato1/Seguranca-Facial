@@ -1,6 +1,7 @@
 import { setupCadastro } from './modules/cadastroPage.js';
 import { setupReconhecimento } from './modules/reconhecimentoPage.js';
 import { setupResponsiveSidebar } from './modules/responsive.js';
+import { setupAjaxForm } from './modules/ajaxForms.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -27,12 +28,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
      setupResponsiveSidebar();
 
+
+
     const isCadastroPage = document.querySelector('#cadastroForm');
     const isReconhecimentoPage = document.getElementById('resultado');
+    const formCadastroAluno = document.getElementById('formCadastroAluno');
+    const formEditaAluno = document.getElementById('formEditaAluno');
+    const formEditaResponsavel = document.getElementById('formEditaResponsavel');
 
     if (isCadastroPage) {
         setupCadastro();
     } else if (isReconhecimentoPage) {
         setupReconhecimento();
+    }
+
+    if (formCadastroAluno) {
+        setupAjaxForm('formCadastroAluno', 'formStatus');
+    }
+
+    if (formEditaAluno) {
+        setupAjaxForm('formEditaAluno', 'formStatus');
+    }
+    if (formEditaResponsavel) {
+        setupAjaxForm('formEditaResponsavel', 'formStatus');
     }
 });

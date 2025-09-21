@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($instituicao && password_verify($senha, $instituicao['senha'])) {
         $_SESSION['id_instituicao'] = $instituicao['id'];
         $_SESSION['nome_instituicao'] = $instituicao['nome'];
-        header("Location: ../painel.php");
+        header("Location: ../pages/painel.php");
     } else {
         header("Location: ../index.php?erro=login_invalido");
     }

@@ -1,7 +1,9 @@
 import { startVideo, captureFrameAsBase64 } from './camera.js';
+import { startFaceDetection } from './faceFeedback.js';
 
 export function setupReconhecimento() {
     startVideo();
+    startFaceDetection();
     const resultadoEl = document.getElementById('resultado');
     const video = document.getElementById('video');
     let isProcessing = false;

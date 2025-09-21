@@ -2,51 +2,47 @@
 require 'sessoes.php';
 require 'conexao.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id_responsavel = $_POST['id_responsavel'];
-    $nome_responsavel = $_POST['nome_responsavel'];
-    $parentesco = $_POST['parentesco'];
-    $imagem_base64 = $_POST['imagem_base64'];
+header('Content-Type: application/json');
 
-    $pdo->beginTransaction();
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Método não permitido.'], JSON_UNESCAPED_UNICODE);
+    exit();
+}
 
-    try {
-        // 1. Atualiza os dados de texto no banco de dados
-        $sql = "UPDATE responsaveis SET nome_completo = :nome, parentesco = :parentesco WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            'nome' => $nome_responsavel,
-            'parentesco' => $parentesco,
-            'id' => $id_responsavel
-        ]);
+$id_responsavel = $_POST['id_responsavel'] ?? 0;
+$nome_responsavel = $_POST['nome_responsavel'] ?? '';
+$parentesco = $_POST['parentesco'] ?? '';
 
-        // 2. Se uma nova imagem foi enviada, atualiza no serviço Python
-        if (!empty($imagem_base64)) {
-            $python_service_url = 'http://127.0.0.1:5000/add_face';
-            $data = ['id_responsavel' => $id_responsavel, 'image' => $imagem_base64];
-            
-            $ch = curl_init($python_service_url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            
-            $response = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            $responseData = json_decode($response, true);
+// Validação
+$id_responsavel_validado = filter_var($id_responsavel, FILTER_VALIDATE_INT);
+if (!$id_responsavel_validado || empty($nome_responsavel) || empty($parentesco)) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Dados inválidos ou campos obrigatórios não preenchidos.'], JSON_UNESCAPED_UNICODE);
+    exit();
+}
 
-            if ($httpcode != 200 || !$responseData['success']) {
-                throw new Exception("Falha ao atualizar o rosto no serviço de IA: " . ($responseData['error'] ?? 'Erro desconhecido'));
-            }
-        }
+try {
+    // Por enquanto, não estamos atualizando a imagem aqui, apenas os dados de texto.
+    // A lógica de atualização de imagem pode ser uma funcionalidade futura.
+    $sql = "UPDATE responsaveis SET nome_completo = :nome, parentesco = :parentesco WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        'nome' => $nome_responsavel,
+        'parentesco' => $parentesco,
+        'id' => $id_responsavel_validado
+    ]);
 
-        $pdo->commit();
-        header("Location: ../pages/gerenciar_responsaveis.php?sucesso=Responsável atualizado com sucesso!");
-
-    } catch (Exception $e) {
-        $pdo->rollBack();
-        die("Erro ao atualizar responsável: " . $e->getMessage());
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(['success' => true, 'message' => 'Responsável atualizado com sucesso!'], JSON_UNESCAPED_UNICODE);
+    } else {
+        echo json_encode(['success' => true, 'message' => 'Nenhuma alteração foi detectada.'], JSON_UNESCAPED_UNICODE);
     }
+    exit();
+
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Erro no servidor ao tentar atualizar o responsável.'], JSON_UNESCAPED_UNICODE);
+    exit();
 }
 ?>

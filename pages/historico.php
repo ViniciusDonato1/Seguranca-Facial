@@ -30,9 +30,9 @@ $historico = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php foreach ($historico as $registro): ?>
                     <tr>
-                        <td> data-label="Data Saida"<?php echo date('d/m/Y H:i:s', strtotime($registro['data_saida'])); ?></td>
-                        <td> data-label="Nome Aluno"<?php echo htmlspecialchars($registro['nome_aluno']); ?></td>
-                        <td> data-label="Nome Responsavel"<?php echo htmlspecialchars($registro['nome_responsavel']); ?></td>
+                        <td data-label="Data Saida"><?php echo date('d/m/Y H:i:s', strtotime($registro['data_saida'])); ?></td>
+                        <td data-label="Nome Aluno"><?php echo htmlspecialchars($registro['nome_aluno']); ?></td>
+                        <td data-label="Nome Responsavel"><?php echo htmlspecialchars($registro['nome_responsavel']); ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <?php if (empty($historico)): ?>

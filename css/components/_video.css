@@ -10,3 +10,9 @@
 #resultado p { margin: 10px 0; }
 #resultado ul { list-style-type: disc; padding-left: 25px; margin: 15px 0; }
 #resultado ul li { margin-bottom: 5px; }
+
+.video-container canvas {
+    position: absolute; /* Permite que o canvas flutue sobre o vídeo */
+    top: 0;
+    left: 0;
+}
