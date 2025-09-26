@@ -2,20 +2,16 @@
 require '../php/sessoes.php';
 require '../php/conexao.php';
 
-// --- LÓGICA DO FILTRO E BUSCA (ADICIONADO) ---
 
-// 1. Pega os valores de busca e filtro da URL (se existirem)
 $termo_busca = $_GET['busca'] ?? '';
 $filtro_turma = $_GET['turma'] ?? '';
 
-// 2. Monta a base da consulta SQL
 $sql = "SELECT id, nome_completo, cpf, data_nascimento, turma 
         FROM alunos 
         WHERE id_instituicao = :id_instituicao";
 
 $params = ['id_instituicao' => $id_instituicao];
 
-// 3. Adiciona as condições de busca e filtro na consulta SQL
 if (!empty($termo_busca)) {
     $sql .= " AND (nome_completo LIKE :busca OR cpf LIKE :busca)";
     $params['busca'] = '%' . $termo_busca . '%';
@@ -31,7 +27,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// --- LÓGICA PARA POPULAR O DROPDOWN DE TURMAS (ADICIONADO) ---
 $sql_turmas = "SELECT DISTINCT turma FROM alunos WHERE id_instituicao = :id_instituicao AND turma IS NOT NULL AND turma != '' ORDER BY turma ASC";
 $stmt_turmas = $pdo->prepare($sql_turmas);
 $stmt_turmas->execute(['id_instituicao' => $id_instituicao]);

@@ -1,9 +1,7 @@
-/* Estilos para a estrutura principal: sidebar e conteúdo */
 .sidebar {
     width: 260px;
     background-color: var(--sidebar-bg);
     height: 100vh;
-    padding: 20px;
     box-sizing: border-box;
     flex-shrink: 0;
     border-right: 1px solid var(--border-color);
@@ -39,6 +37,13 @@
     background-color: var(--sidebar-hover-bg);
     color: var(--heading-color);
 }
+
+.sidebar .theme-switcher { 
+    text-align: center;
+    padding-top: 10px;
+}
+
+
 .main-content {
     flex-grow: 1;
     padding: 30px 40px;
@@ -59,4 +64,33 @@
 
 .sidebar-toggle {
     display: none; 
+}
+
+.btn-theme-toggle { 
+    margin-top: 10px;
+    left: 20px;
+    z-index: 10; 
+    width: 60px;
+    height: 28px;
+    background-color: var(--input-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.bolaa {
+    width: 22px;
+    height: 22px;
+    background-color: var(--sidebar-text); 
+    border-radius: 50%;
+    position: relative;
+    left: 0;
+    transition: left 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-theme-toggle.active .bolaa {
+    left: 30px;
 }

@@ -1,4 +1,12 @@
-form label { display: block; text-align: left; margin-top: 15px; margin-bottom: 5px; font-weight: 500; color: var(--text-color); }
+form label { 
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--text-color); 
+}
+
 input[type="text"], input[type="email"], input[type="password"], input[type="date"], select {
     width: 100%;
     padding: 12px 15px;
@@ -10,11 +18,13 @@ input[type="text"], input[type="email"], input[type="password"], input[type="dat
     box-sizing: border-box;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus {
     border-color: var(--button-primary-bg);
     outline: none;
     box-shadow: 0 0 0 2px var(--button-primary-bg);
 }
+
 button, .btn-action {
     padding: 12px 20px;
     background-color: var(--button-primary-bg);
@@ -30,15 +40,44 @@ button, .btn-action {
     text-align: center;
     width: auto;
 }
-button[type="submit"] { width: 100%; margin-top: 20px; }
-button:hover, .btn-action:hover { background-color: var(--button-primary-hover-bg); }
-button:disabled { background-color: var(--input-border); color: var(--text-color); cursor: not-allowed; }
-.sidebar .theme-switcher { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); }
-.btn-theme-toggle { font-size: 0.9em !important; padding: 8px 15px !important; }
-.status-message { font-weight: 500; margin-top: 20px; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid transparent; }
-.success { color: var(--success-color); background-color: rgba(30, 142, 62, 0.1); border-color: rgba(30, 142, 62, 0.2); }
-.error { color: var(--error-color); background-color: rgba(217, 48, 37, 0.1); border-color: rgba(217, 48, 37, 0.2); }
 
+button[type="submit"] { 
+    width: 100%;
+    margin-top: 20px; 
+}
+
+button:hover, .btn-action:hover { 
+    background-color: var(--button-primary-hover-bg); 
+}
+
+button:disabled { 
+    background-color: var(--input-border);
+    color: var(--text-color);
+    cursor: not-allowed;
+}
+
+
+
+.status-message { 
+    font-weight: 500; 
+    margin-top: 20px; 
+    padding: 12px; 
+    border-radius: 8px; 
+    text-align: center; 
+    border: 1px solid transparent; 
+}
+
+.success { 
+    color: var(--success-color);
+    background-color: rgba(30, 142, 62, 0.1); 
+    border-color: rgba(30, 142, 62, 0.2); 
+}
+
+.error { 
+    color: var(--error-color); 
+    background-color: rgba(217, 48, 37, 0.1); 
+    border-color: rgba(217, 48, 37, 0.2); 
+}
 
 .search-filter-container {
     background-color: var(--item-bg);
@@ -46,39 +85,46 @@ button:disabled { background-color: var(--input-border); color: var(--text-color
     border-radius: 8px;
     margin-bottom: 25px;
     border: 1px solid var(--border-color);
+    width: 700px;
 }
 
-/* O formulário em si, agora com o alinhamento corrigido */
+
 .search-filter-form {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a linha de baixo em telas menores */
-    gap: 20px; /* Espaçamento entre os grupos de formulário */
-    align-items: flex-end; /* A MÁGICA: Alinha todos os itens pela base */
+    flex-wrap: wrap; 
+    gap: 20px; 
+    align-items: flex-end; 
 }
 
-/* Cada grupo de label + input */
+
 .form-group {
-    flex: 1 1 auto; /* Permite que os campos cresçam, mas sem encolher demais */
     display: flex;
-    flex-direction: column; /* Coloca o label acima do input */
+    flex-direction: column; 
+    padding-right: 20px;
+    gap: 10px;
 }
 
-/* O grupo específico dos botões, para que fiquem juntos */
+.form-group input{
+    width: 180px;
+    height: 25px;
+    border-radius: 5px;
+    border: transparent;
+}
+
 .form-group.form-group-buttons {
-    flex-grow: 0; /* Impede que o grupo de botões cresça desnecessariamente */
-    flex-direction: row; /* Mantém os botões lado a lado */
-    gap: 10px; /* Espaço entre os botões */
+    flex-grow: 0; 
+    flex-direction: row; 
+    gap: 10px; 
 }
 
 .form-group label {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 0.9em;
+    margin-top: 0%;
+    margin-bottom: 10px;
 }
 
 .form-group .btn-action {
     padding: 10px 18px;
-    margin: 0; /* Remove margens extras */
+    margin: 0; 
 }
 
 .form-group .btn-secondary {

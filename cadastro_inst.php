@@ -11,6 +11,7 @@ if (isset($_SESSION['id_instituicao'])) {
     <meta charset="UTF-8">
     <title>Cadastro - Segurança Facial</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -21,6 +22,9 @@ if (isset($_SESSION['id_instituicao'])) {
 </head>
 <body>
     <div class="auth-wrapper">
+        <button id="theme-toggle" class="mudar-tema">
+            <div class="bola"></div>
+        </button>
         <div class="form-section">
             <div class="form-container">
                 <h1>Cadastro</h1>
@@ -43,9 +47,13 @@ if (isset($_SESSION['id_instituicao'])) {
             </div>
         </div>
         <div class="branding-section">
+        <div id="particles-js"></div>
             <h2>SEGURANÇA FACIAL</h2>
             <p>Mais que tecnologia, uma solução segura para o cuidado das nossas crianças.</p>
         </div>
     </div>
+
+    <script src="js/modules/particles.js"></script>
+    <script defer src="js/theme-login.js"></script>
 </body>
 </html>

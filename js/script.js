@@ -6,26 +6,33 @@ import { setupAjaxForm } from './modules/ajaxForms.js';
 document.addEventListener('DOMContentLoaded', () => {
     
     const themeToggleBtn = document.getElementById('themeToggle');
-    if (themeToggleBtn) {
-        const currentTheme = localStorage.getItem('theme');
 
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-            themeToggleBtn.innerText = currentTheme === 'dark-mode' ? 'Modo Claro' : 'Modo Escuro';
-        } else {
-            document.body.classList.add('light-mode');
-            themeToggleBtn.innerText = 'Modo Escuro';
-            localStorage.setItem('theme', 'light-mode');
+    const applyTheme = () => {
+        const currentTheme = localStorage.getItem('theme') || 'light-mode';
+        document.body.className = '';
+        document.body.classList.add(currentTheme);
+    
+    
+     if (themeToggleBtn) {
+            if (currentTheme === 'dark-mode') {
+                themeToggleBtn.classList.add('active')
+            } else {
+                themeToggleBtn.classList.remove('active')
+            }
         }
+    };
 
+    applyTheme();
+
+    if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            document.body.classList.toggle('light-mode');
-            const newTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
-            themeToggleBtn.innerText = newTheme === 'dark-mode' ? 'Modo Claro' : 'Modo Escuro';
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const newTheme = isDarkMode ? 'light-mode' : 'dark-mode';
             localStorage.setItem('theme', newTheme);
+            applyTheme(); 
         });
     }
+
      setupResponsiveSidebar();
 
 
