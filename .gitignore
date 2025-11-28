@@ -1,0 +1,15 @@
+# Arquivos de Sistema e IDE
+.DS_Store
+.vscode/
+
+# Python (Lixo gerado automaticamente)
+__pycache__/
+*.py[cod]
+
+# Variáveis de Ambiente (SEGURANÇA MÁXIMA: NUNCA ENVIE ISTO)
+.env
+
+# Pasta de rostos 
+python_service/known_faces/
+
+usar.txt
